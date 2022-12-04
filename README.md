@@ -14,20 +14,20 @@ Features appended:
 1. Checkout the [readme from EdVince's repo](https://github.com/EdVince/Stable-Diffusion-NCNN/blob/main/README.md) for implementation details.
 2. Download and extract the assets from the replease of this repo, the layout should looks like:
 
->
-> YOUREXECUTABLE
-> assets
-> ├── AutoencoderKL-fp16.bin
-> ├── AutoencoderKL-fp16.param
-> ├── FrozenCLIPEmbedder-fp16.bin
-> ├── FrozenCLIPEmbedder-fp16.param
-> ├── log_sigmas.bin
-> ├── RealESRGAN_x4plus_anime_6B.fp32-sim-sim-opt.bin
-> ├── RealESRGAN_x4plus_anime_6B.fp32-sim-sim-opt.param
-> ├── UNetModel-fp16.bin
-> ├── UNetModel-fp16.param
-> └── vocab.txt
->
+```
+YOUREXECUTABLE
+assets
+├── AutoencoderKL-fp16.bin
+├── AutoencoderKL-fp16.param
+├── FrozenCLIPEmbedder-fp16.bin
+├── FrozenCLIPEmbedder-fp16.param
+├── log_sigmas.bin
+├── RealESRGAN_x4plus_anime_6B.fp32-sim-sim-opt.bin
+├── RealESRGAN_x4plus_anime_6B.fp32-sim-sim-opt.param
+├── UNetModel-fp16.bin
+├── UNetModel-fp16.param
+└── vocab.txt
+```
 
 ## Example usage:
 
