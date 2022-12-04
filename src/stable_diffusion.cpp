@@ -7,7 +7,7 @@
 #include <map>
 #include <cmath>
 #include <ncnn/net.h>
-#include "./prompt_slover.h"
+//#include "./prompt_slover.h"
 //#include "./decoder_slover.h"
 //#include "./diffusion_slover.h"
 #include "./esr4x.hpp"
@@ -19,6 +19,7 @@
 #include <numeric>
 #include <cstdio>
 
+#include "./prompt_slover.hpp"
 #include "./decoder_slover.hpp"
 #include "./diffusion_slover.hpp"
 
@@ -42,13 +43,7 @@ void sd( std::string positive_prompt = std::string{}, std::string output_png_pat
     std::cout << "step: " << step << std::endl;
     std::cout << "seed: " << seed << std::endl;
     std::cout << "----------------[prompt]------------------" << std::endl;
-    ncnn::Mat cond;
-    ncnn::Mat uncond;
-    {
-        PromptSlover prompt_slover;
-        cond = prompt_slover.get_conditioning( positive_prompt );
-        uncond = prompt_slover.get_conditioning( negative_prompt );
-    }
+    auto [cond, uncond] = prompt_solver( positive_prompt, negative_prompt );
     std::cout << "----------------[diffusion]---------------" << std::endl;
     ncnn::Mat sample = diffusion_solver( seed, step, cond, uncond );
     std::cout << "----------------[decode]------------------" << std::endl;
