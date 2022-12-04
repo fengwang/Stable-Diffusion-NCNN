@@ -10,7 +10,8 @@ int main()
     for ( int seed = 1; seed < 100; ++seed )
     {
         std::string output_png_path = std::string{"./result_"} + std::to_string( seed ) + std::string{".png"};
-        sd( positive_prompt, output_png_path, negative_prompt, 30, seed );
+        //sd( positive_prompt, output_png_path, negative_prompt, 30, seed );
+        sd( positive_prompt, output_png_path, negative_prompt, 10, seed );
     }
 
     return 0;

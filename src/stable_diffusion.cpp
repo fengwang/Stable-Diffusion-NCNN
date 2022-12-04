@@ -8,8 +8,8 @@
 #include <cmath>
 #include <ncnn/net.h>
 #include "./prompt_slover.h"
-#include "./decoder_slover.h"
-#include "./diffusion_slover.h"
+//#include "./decoder_slover.h"
+//#include "./diffusion_slover.h"
 #include "./esr4x.hpp"
 #include "./save_png.hpp"
 #include <algorithm>
@@ -18,6 +18,9 @@
 #include <cstdint>
 #include <numeric>
 #include <cstdio>
+
+#include "./decoder_slover.hpp"
+#include "./diffusion_slover.hpp"
 
 
 void sd( std::string positive_prompt = std::string{}, std::string output_png_path = std::string{}, std::string negative_prompt = std::string{}, int step = 30, int seed = 42 )
@@ -47,22 +50,11 @@ void sd( std::string positive_prompt = std::string{}, std::string output_png_pat
         uncond = prompt_slover.get_conditioning( negative_prompt );
     }
     std::cout << "----------------[diffusion]---------------" << std::endl;
-    ncnn::Mat sample;
-    {
-        DiffusionSlover diffusion_slover;
-        sample = diffusion_slover.sampler( seed, step, cond, uncond );
-    }
+    ncnn::Mat sample = diffusion_solver( seed, step, cond, uncond );
     std::cout << "----------------[decode]------------------" << std::endl;
-    ncnn::Mat x_samples_ddim;
-    {
-        DecodeSlover decode_slover;
-        x_samples_ddim = decode_slover.decode( sample );
-    }
+    ncnn::Mat x_samples_ddim = decoder_solver( sample );
     std::cout << "----------------[4x]--------------------" << std::endl;
-    {
-        Esr4x esr4x;
-        x_samples_ddim = esr4x.inference( x_samples_ddim );
-    }
+    x_samples_ddim = esr4x( x_samples_ddim );
     std::cout << "----------------[save]--------------------" << std::endl;
     {
         std::vector<std::uint8_t> buffer;

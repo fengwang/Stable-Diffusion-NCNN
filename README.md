@@ -74,9 +74,8 @@ LFLAGS := `pkg-config --libs ncnn` -lstdc++ -pthread -Wl,--gc-sections -flto -fo
 
 
 ## TODO
-1. integrate super-resolution model in the pipeline
-2. provide a GUI
-3. provide a python binding (?)
+1. provide a GUI
+2. provide a python binding (?)
 
 
 ## 99 Examples
