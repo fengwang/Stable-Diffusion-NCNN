@@ -58,7 +58,7 @@ int main ()
 
 Compile and link command
 ```bash
-g++ -o test test.cpp -funsafe-math-optimizations -Ofast -flto=auto  -funroll-all-loops -pipe -march=native -std=c++20 -Wall -Wextra `pkg-config --cflags --libs opencv4` -lncnn -lstdc++ -pthread -Wl,--gc-sections -flto -fopt-info-vec-optimized
+g++ -o test test.cpp -funsafe-math-optimizations -Ofast -flto=auto  -funroll-all-loops -pipe -march=native -std=c++20 -Wall -Wextra `pkg-config --cflags --libs ncnn`  -lstdc++ -pthread -Wl,--gc-sections -flto -fopt-info-vec-optimized
 ```
 
 
@@ -70,7 +70,7 @@ Example usage:
 ```bash
 git clone https://github.com/fengwang/Stable-Diffusion-NCNN.git
 cd Stable-Diffusion-NCNN
-g++ -o test test.cpp -funsafe-math-optimizations -Ofast -flto=auto  -funroll-all-loops -pipe -march=native -std=c++20 -Wall -Wextra `pkg-config --cflags --libs opencv4` -lncnn -lstdc++ -pthread -Wl,--gc-sections -flto -fopt-info-vec-optimized
+g++ -o test test.cpp -funsafe-math-optimizations -Ofast -flto=auto  -funroll-all-loops -pipe -march=native -std=c++20 -Wall -Wextra `pkg-config --cflags --libs ncnn` -lstdc++ -pthread -Wl,--gc-sections -flto -fopt-info-vec-optimized
 ```
 
 However, you need **5.5 GB** memory to run.
