@@ -8,12 +8,12 @@ Features appended:
 1. remove OpenCV dependency
 2. reduce memory usage from 7 GB to 5.5 GB
 3. enable 4X super resolution from [Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN)
-4. header-only
+4. single header-only
 
 
 ## Quick introduction
 1. Checkout the [readme from EdVince's repo](https://github.com/EdVince/Stable-Diffusion-NCNN/blob/main/README.md) for implementation details.
-2. Download and extract the assets from the replease of this repo, the layout should looks like:
+2. Download and extract the assets from [the release of this repo](https://github.com/fengwang/Stable-Diffusion-NCNN/releases/download/release/assets.20221204.tar.zst), the layout should looks like:
 
 ```
 YOUREXECUTABLE
@@ -32,11 +32,18 @@ assets
 
 ## Example usage:
 
-Copy `stable_diffusion.hpp` and the downloaded `assets` to your working directory, and the C++ interface is:
+Copy `stable_diffusion.hpp` and the downloaded `assets` to your working directory, and call C++ api:
 
 ```cpp
-inline void stable_diffusion( std::string positive_prompt = std::string{}, std::string output_png_path = std::string{}, int step = 30, int seed = 42, std::string negative_prompt = std::string{} )
+void
+stable_diffusion(   std::string positive_prompt,
+                    std::string output_png_path,
+                    int step,
+                    int seed,
+                    std::string negative_prompt );
 ```
+
+Checkout the [source file](./stable_diffusion.hpp) to find the default values to these arguments.
 
 **Example usage**
 
@@ -61,16 +68,24 @@ Compile and link command
 g++ -o test test.cpp -funsafe-math-optimizations -Ofast -flto=auto  -funroll-all-loops -pipe -march=native -std=c++20 -Wall -Wextra `pkg-config --cflags --libs ncnn`  -lstdc++ -pthread -Wl,--gc-sections -flto -fopt-info-vec-optimized
 ```
 
+Run
 
-## Build
+```bash
+./test
+```
+
+
+
+## Dependency
 
 This project only relies on [ncnn](https://github.com/Tencent/ncnn). For Archlinux users, [ncnn-git](https://aur.archlinux.org/packages/ncnn-git) package from AUR is sufficient. For others, please install it manually.
 
-Example usage:
+To build a test application:
 ```bash
 git clone https://github.com/fengwang/Stable-Diffusion-NCNN.git
 cd Stable-Diffusion-NCNN
 g++ -o test test.cpp -funsafe-math-optimizations -Ofast -flto=auto  -funroll-all-loops -pipe -march=native -std=c++20 -Wall -Wextra `pkg-config --cflags --libs ncnn` -lstdc++ -pthread -Wl,--gc-sections -flto -fopt-info-vec-optimized
+./test
 ```
 
 However, you need **5.5 GB** memory to run.
@@ -78,21 +93,7 @@ However, you need **5.5 GB** memory to run.
 
 ### Linking to NCNN
 
-If **ncnn** is not installed in the standard paths (such as `/usr/include/ncnn` and `/usr/lib/libncnn.so`, please update the makefile to comply. For example:
-
-Update CXXFLAGS
-
-```
-#CXXFLAGS := -funsafe-math-optimizations -Ofast -flto=auto  -funroll-all-loops -pipe -march=native -std=c++20 -Wall -Wextra
-CXXFLAGS := -funsafe-math-optimizations -Ofast -flto=auto  -funroll-all-loops -pipe -march=native -std=c++20 -Wall -Wextra `pkg-config --cflags ncnn`
-```
-
-Update LFLAGS:
-
-```
-#LFLAGS := -lncnn -lstdc++ -pthread -Wl,--gc-sections -flto -fopt-info-vec-optimized
-LFLAGS := `pkg-config --libs ncnn` -lstdc++ -pthread -Wl,--gc-sections -flto -fopt-info-vec-optimized
-```
+If **ncnn** is not installed in the standard paths (such as `/usr/include/ncnn` and `/usr/lib/libncnn.so`, please update the commandline to comply. For example:
 
 
 ## TODO
