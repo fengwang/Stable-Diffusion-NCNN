@@ -7,7 +7,7 @@ As I cannot push LFS object to a public fork, I make this repo standalone.
 Features appended:
 1. remove OpenCV dependency
 2. reduce memory usage from 7 GB to 5.5 GB
-3. enable 4X super resolution from [Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN)
+3. enable 4X super resolution with [Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN)
 4. single header-only
 
 
@@ -94,6 +94,9 @@ However, you need **5.5 GB** memory to run.
 ### Linking to NCNN
 
 If **ncnn** is not installed in the standard paths (such as `/usr/include/ncnn` and `/usr/lib/libncnn.so`, please update the commandline to comply. For example:
+```bash
+g++ -o test test.cpp -funsafe-math-optimizations -Ofast -flto=auto  -funroll-all-loops -pipe -march=native -std=c++20 -Wall -Wextra -I/usr/local/include -L/usr/local/lib -lncnn -lstdc++ -pthread -Wl,--gc-sections -flto -fopt-info-vec-optimized
+```
 
 
 ## TODO
